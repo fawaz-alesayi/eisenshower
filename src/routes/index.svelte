@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import "@fontsource/ibm-plex-sans"
+</script>
+
+<h1>Eisenshower</h1>
+
+<style lang="scss">
+    h1 { font-family: "IBM Plex Mono", monospace; }
+</style>
