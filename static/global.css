@@ -1,1 +1,5 @@
 @import url("modern-normalize.css");
+
+:root {
+    background-color: #CAF0F8;
+}
