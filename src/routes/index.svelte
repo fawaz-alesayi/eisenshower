@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
 	import '@fontsource/ibm-plex-sans';
-	let todo;
+	import { nanoid } from 'nanoid';
+	import { todos } from '$lib/stores/todoStore';
+	let todoContent: string;
 </script>
 
 <h1>Eisenshower</h1>
@@ -12,9 +14,25 @@
 	<span> - Dwight Eisenhower, 34th U.S. President</span>
 </section>
 
-<form action="" on:submit|preventDefault>
-	<input type="text" placeholder="Start now. Type your first task." />
+<h3>Add your tasks</h3>
+<form
+	on:submit|preventDefault={() =>
+		todos.update((oldValues) => [...oldValues, { content: todoContent, id: nanoid() }])}
+>
+	<input type="text" bind:value={todoContent} placeholder="Start now. Type your first task." />
+	<button type="submit" class="add-todo">Add</button>
 </form>
+
+{#each $todos as todo (todo.id)}
+	<h5>{todo.content}</h5>
+	<button
+		on:click={() =>
+			todos.update((oldValues) => [...oldValues.filter((element) => element.id != todo.id)])}
+		>Remove</button
+	>
+{/each}
+
+<h3>Order Them</h3>
 
 <style lang="scss">
 	$dark: #03045e;
@@ -35,6 +53,12 @@
 		color: $dark;
 	}
 
+	h3 {
+		font-family: 'IBM Plex Sans', sans-serif;
+		color: $dark;
+		font-size: 24px;
+	}
+
 	section {
 		font-family: 'IBM Plex Sans';
 		font-style: normal;
@@ -53,5 +77,15 @@
 		font-size: 20px;
 		padding: 12px;
 		background-color: $light;
+	}
+
+	.add-todo {
+		width: 140px;
+		height: 30px;
+		font-size: 14px;
+		margin-top: 20px;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
 	}
 </style>
