@@ -5,9 +5,10 @@ import { writable } from 'svelte/store';
 
 const KEY_NAME = 'eisenshower_todos';
 
-export const todos = persist(writable<TodoItem[]>([]), localStorageStore(), KEY_NAME)
+export const todos = persist(writable<TodoItem[]>([]), localStorageStore(), KEY_NAME);
 
-type TodoItem = {
-    id: string;
-    content: string;
-}
+export type TodoItem = {
+	id: string;
+	content: string;
+	completed: boolean;
+};

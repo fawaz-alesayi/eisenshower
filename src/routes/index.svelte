@@ -2,7 +2,28 @@
 	import '@fontsource/ibm-plex-sans';
 	import { nanoid } from 'nanoid';
 	import { todos } from '$lib/stores/todoStore';
+	import EisenhowerMatrix from '$lib/eisenhowerMatrix.svelte';
 	let todoContent: string;
+
+	const addTodo = async () => {
+		const todo = {
+			id: nanoid(),
+			content: todoContent,
+			completed: false
+		};
+		todos.update((oldValues) => [...oldValues, todo]);
+		todoContent = '';
+	};
+
+	const removeTodo = async (id: string) => {
+		todos.update((oldValues) => oldValues.filter((todo) => todo.id !== id));
+	};
+
+	const toggleTodo = async (id: string) => {
+		todos.update((oldValues) =>
+			oldValues.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+		);
+	};
 </script>
 
 <h1>Eisenshower</h1>
@@ -16,31 +37,56 @@
 
 <h3>Add your tasks</h3>
 <form
-	on:submit|preventDefault={() =>
-		todos.update((oldValues) => [...oldValues, { content: todoContent, id: nanoid() }])}
+	on:submit|preventDefault={() => {
+		if (todoContent.trim()) {
+			addTodo();
+		}
+	}}
 >
 	<input type="text" bind:value={todoContent} placeholder="Start now. Type your first task." />
 	<button type="submit" class="add-todo">Add</button>
 </form>
 
 {#each $todos as todo (todo.id)}
-	<h5>{todo.content}</h5>
-	<button
-		on:click={() =>
-			todos.update((oldValues) => [...oldValues.filter((element) => element.id != todo.id)])}
-		>Remove</button
+	<h5
+		class="todo"
+		draggable="true"
+		on:dragstart={(event) => {
+			event.dataTransfer.setData('text/plain', todo.id);
+		}}
+		on:dragend={(event) => {
+			event.dataTransfer.clearData();
+		}}
+		on:click={() => {
+			toggleTodo(todo.id);
+		}}
 	>
+		{todo.content}
+	</h5>
+	{todo.completed ? '✅' : '❌'}
+	<button class="complete-todo">
+		{todo.completed ? 'Undo' : 'Complete'}
+	</button>
+	<button
+		class="remove-todo"
+		on:click={() => {
+			removeTodo(todo.id);
+		}}
+	>
+		✖
+	</button>
 {/each}
 
 <h3>Order Them</h3>
 
+<EisenhowerMatrix />
+
 <style lang="scss">
-	$dark: #03045e;
-	$light: #caf0f8;
+	@use './src/lib/theme.scss';
 
 	h1 {
 		font-family: 'IBM Plex Mono', monospace;
-		color: $dark;
+		color: theme.$dark;
 		text-align: center;
 	}
 
@@ -50,12 +96,12 @@
 		font-weight: bold;
 		font-size: 32px;
 		line-height: 42px;
-		color: $dark;
+		color: theme.$dark;
 	}
 
 	h3 {
 		font-family: 'IBM Plex Sans', sans-serif;
-		color: $dark;
+		color: theme.$dark;
 		font-size: 24px;
 	}
 
@@ -67,6 +113,13 @@
 		line-height: 21px;
 	}
 
+	.todo {
+		font-family: 'IVM Plex Mono', monospace;
+		font-size: 18px;
+		color: theme.$dark;
+		display: inline;
+	}
+
 	input {
 		height: 30px;
 		width: 75vw;
@@ -76,7 +129,7 @@
 		margin-right: auto;
 		font-size: 20px;
 		padding: 12px;
-		background-color: $light;
+		background-color: theme.$light;
 	}
 
 	.add-todo {
