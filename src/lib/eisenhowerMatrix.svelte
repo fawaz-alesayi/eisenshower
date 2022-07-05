@@ -12,29 +12,21 @@
 <!--A 2x2 Grd of divs-->
 <div class="container">
 	<Cell category="ImportantUrgent">
-		<h4>Urgent</h4>
-		<h4>Important</h4>
 		{#each $importantUrgentTodos as todo}
 			<TodoItem {todo} />
 		{/each}
 	</Cell>
 	<Cell category="ImportantNotUrgent">
-		<h4>Not Urgent</h4>
-		<h4>Important</h4>
 		{#each $importantNotUrgentTodos as todo}
 			<TodoItem {todo} />
 		{/each}
 	</Cell>
 	<Cell category="NotImportantUrgent">
-		<h4>Urgent</h4>
-		<h4>Not Important</h4>
 		{#each $notImportantUrgentTodos as todo}
 			<TodoItem {todo} />
 		{/each}
 	</Cell>
 	<Cell category="NotImportantNotUrgent">
-		<h4>Not Urgent</h4>
-		<h4>Not Important</h4>
 		{#each $notImportantNotUrgentTodos as todo}
 			<TodoItem {todo} />
 		{/each}

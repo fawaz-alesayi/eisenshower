@@ -18,19 +18,19 @@
 <section>
 	<h5
 		class="todo"
-		on:click={() => {
+		on:click|stopPropagation={() => {
 			toggleTodo(todo.id);
 		}}
 	>
 		{todo.content}
 	</h5>
 	{todo.completed ? '✅' : '❌'}
-	<button class="complete-todo" on:click={() => toggleTodo(todo.id)}>
+	<button class="complete-todo" on:click|stopPropagation={() => toggleTodo(todo.id)}>
 		{todo.completed ? 'Undo' : 'Complete'}
 	</button>
 	<button
 		class="remove-todo"
-		on:click={() => {
+		on:click|stopPropagation={() => {
 			removeTodo(todo.id);
 		}}
 	>
