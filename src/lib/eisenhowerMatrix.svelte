@@ -1,51 +1,44 @@
 <script lang="ts">
-	import type { TodoItem } from './stores/todoStore';
-	import { todos } from '$lib/stores/todoStore';
-
-	let urgentNotImportant: TodoItem[] = [];
-
-	let handleDragEnter = (event: DragEvent) => {
-		// get the dragged item and put it on top of the list
-		const draggedItem = event.dataTransfer.getData('text/plain');
-		if (draggedItem) {
-			const item = $todos.find((todo) => todo.id === draggedItem);
-			if (item) {
-				// add the item to the top of the of urgentNotImportant list
-				urgentNotImportant = [item, ...urgentNotImportant];
-			}
-		}
-	};
+	import {
+		importantUrgentTodos,
+		importantNotUrgentTodos,
+		notImportantNotUrgentTodos,
+		notImportantUrgentTodos
+	} from './stores/todoStore';
+	import Cell from './Cell.svelte';
+	import TodoItem from './TodoItem.svelte';
 </script>
 
 <!--A 2x2 Grd of divs-->
 <div class="container">
-	<div class="bordered" on:dragenter|preventDefault|stopPropagation={handleDragEnter}>
+	<Cell category="ImportantUrgent">
 		<h4>Urgent</h4>
 		<h4>Important</h4>
-		{#each urgentNotImportant as item (item.id)}
-			<div
-				class="todo"
-				draggable="true"
-				on:dragstart={(event) => {
-					event.dataTransfer.setData('text/plain', item.id);
-				}}
-			>
-				<h5>{item.content}</h5>
-			</div>
+		{#each $importantUrgentTodos as todo}
+			<TodoItem {todo} />
 		{/each}
-	</div>
-	<div class="bordered">
+	</Cell>
+	<Cell category="ImportantNotUrgent">
 		<h4>Not Urgent</h4>
 		<h4>Important</h4>
-	</div>
-	<div class="bordered">
+		{#each $importantNotUrgentTodos as todo}
+			<TodoItem {todo} />
+		{/each}
+	</Cell>
+	<Cell category="NotImportantUrgent">
 		<h4>Urgent</h4>
 		<h4>Not Important</h4>
-	</div>
-	<div class="bordered">
+		{#each $notImportantUrgentTodos as todo}
+			<TodoItem {todo} />
+		{/each}
+	</Cell>
+	<Cell category="NotImportantNotUrgent">
 		<h4>Not Urgent</h4>
 		<h4>Not Important</h4>
-	</div>
+		{#each $notImportantNotUrgentTodos as todo}
+			<TodoItem {todo} />
+		{/each}
+	</Cell>
 </div>
 
 <style lang="scss">
@@ -54,20 +47,15 @@
 
 	// a 2x2 grid of squares
 	.container {
+		margin: auto auto;
 		display: grid;
 		height: 200px;
 		width: 100%;
-		grid-template-columns: repeat(2, 1fr);
-	}
+		max-width: 800px;
+		grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 
-	.bordered {
-		border: 1px solid black;
-		text-align: center;
-
-		h4 {
-			font-family: 'IBM Plex Sans', sans-serif;
-			color: theme.$dark;
-			font-size: 14px;
+		@media (max-width: 600px) {
+			grid-template: repeat(1, 1fr) / repeat(1, 1fr);
 		}
 	}
 </style>
