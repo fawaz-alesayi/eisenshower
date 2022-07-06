@@ -41,7 +41,6 @@
 	.container {
 		margin: auto auto;
 		display: grid;
-		height: 200px;
 		width: 100%;
 		max-width: 800px;
 		grid-template: repeat(2, 1fr) / repeat(2, 1fr);

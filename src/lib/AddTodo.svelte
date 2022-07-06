@@ -2,6 +2,7 @@
 	import '@fontsource/ibm-plex-sans';
 	import { nanoid } from 'nanoid';
 	import { todos, type TodoCategory } from '$lib/stores/todoStore';
+	import { scale } from 'svelte/transition';
 
 	let todoContent: string;
 	export let todoCategory: TodoCategory;
@@ -16,6 +17,8 @@
 		todos.update((oldValues) => [...oldValues, todo]);
 		todoContent = '';
 	};
+
+	let focused = false;
 </script>
 
 <form
@@ -25,22 +28,40 @@
 		}
 	}}
 >
-	<input type="text" bind:value={todoContent} placeholder="Start now. Type your first task." />
-	<button type="submit" class="add-todo">Add</button>
+	<input
+		type="text"
+		bind:value={todoContent}
+		on:focus={() => (focused = true)}
+		on:blur={() => (focused = false)}
+		placeholder="Start now. Type your first task."
+	/>
+
+	{#if focused}
+		<hr transition:scale />
+	{/if}
 </form>
 
 <style lang="scss">
 	@use './src/lib/theme.scss';
 
 	input {
-		height: 30px;
-		margin-top: 32px;
+		height: 15px;
+		margin-top: 12px;
 		display: block;
+		width: 90%;
 		margin-left: auto;
 		margin-right: auto;
-		font-size: 20px;
-		padding: 12px;
+		font-size: 14px;
+		padding: 8px;
 		background-color: theme.$light;
+		border: 0;
+	}
+
+	hr {
+		height: 0.5px;
+		width: 80%;
+		border: none;
+		background-color: theme.$dark;
 	}
 
 	.add-todo {

@@ -10,7 +10,7 @@
 	const showModal = () => modal.set(bind(AddTodo, { todoCategory: category }));
 </script>
 
-<Modal
+<!-- <Modal
 	show={$modal}
 	styleBg={{
 		justifyContent: 'start'
@@ -20,7 +20,13 @@
 		<p class="title">{title}</p>
         <slot />
 	</div>
-</Modal>
+</Modal> -->
+
+<div class="cell">
+	<p class="title">{title}</p>
+	<AddTodo todoCategory={category}/>
+	<slot />
+</div>
 
 <style lang="scss">
 	@use './src/lib/theme.scss';
@@ -29,7 +35,7 @@
 		border: 1px solid black;
 		text-align: center;
 		width: 100%;
-		height: 100px;
+		height: 300px;
 
 		.title {
 			font-family: 'IBM Plex Mono', monospace;
