@@ -1,6 +1,8 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
 	import { todos, type TodoItem } from '$lib/stores/todoStore';
+	import { fly } from 'svelte/transition';
+	import DeleteIcon from './DeleteIcon.svelte';
 
 	export let todo: TodoItem;
 
@@ -15,52 +17,35 @@
 	};
 </script>
 
-<section>
-	<h5
-		class="todo"
-		on:click|stopPropagation={() => {
-			toggleTodo(todo.id);
-		}}
-	>
-		{todo.content}
-	</h5>
-	{todo.completed ? '✅' : '❌'}
-	<button class="complete-todo" on:click|stopPropagation={() => toggleTodo(todo.id)}>
-		{todo.completed ? 'Undo' : 'Complete'}
-	</button>
-	<button
-		class="remove-todo"
-		on:click|stopPropagation={() => {
-			removeTodo(todo.id);
-		}}
-	>
-		✖
-	</button>
+<section class="todo-container" transition:fly={{ duration: 100 }}>
+	<div>
+		{todo.completed ? '✅' : '❌'}
+		<h5
+			class="todo"
+			on:click|stopPropagation={() => {
+				toggleTodo(todo.id);
+			}}
+		>
+			{todo.content}
+		</h5>
+	</div>
+	<div class="btn-group">
+		<button class="btn" on:click|stopPropagation={() => toggleTodo(todo.id)}>
+			{todo.completed ? 'Undo' : '✔'}
+		</button>
+		<button
+			class="btn"
+			on:click|stopPropagation={() => {
+				removeTodo(todo.id);
+			}}
+		>
+			<DeleteIcon width={16} height={16} />
+		</button>
+	</div>
 </section>
 
 <style lang="scss">
 	@use './src/lib/theme.scss';
-
-	h1 {
-		font-family: 'IBM Plex Mono', monospace;
-		color: theme.$dark;
-		text-align: center;
-	}
-
-	h2 {
-		font-family: 'IBM Plex Sans', sans-serif;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 32px;
-		line-height: 42px;
-		color: theme.$dark;
-	}
-
-	h3 {
-		font-family: 'IBM Plex Sans', sans-serif;
-		color: theme.$dark;
-		font-size: 24px;
-	}
 
 	section {
 		font-family: 'IBM Plex Sans';
@@ -70,6 +55,16 @@
 		line-height: 21px;
 	}
 
+	.todo-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		padding: 8px;
+		border-bottom: 1px solid theme.$dark;
+		width: 100%;
+	}
+
 	.todo {
 		font-family: 'IVM Plex Mono', monospace;
 		font-size: 18px;
@@ -77,25 +72,9 @@
 		display: inline;
 	}
 
-	input {
-		height: 30px;
-		width: 75vw;
-		margin-top: 32px;
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		font-size: 20px;
-		padding: 12px;
-		background-color: theme.$light;
-	}
-
-	.add-todo {
-		width: 140px;
-		height: 30px;
-		font-size: 14px;
-		margin-top: 20px;
-		display: block;
-		margin-right: auto;
-		margin-left: auto;
+	.btn {
+		color: theme.$light;
+		width: 100px;
+		text-align: center;
 	}
 </style>

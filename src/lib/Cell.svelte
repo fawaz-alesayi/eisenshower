@@ -23,19 +23,41 @@
 </Modal> -->
 
 <div class="cell">
-	<p class="title">{title}</p>
-	<AddTodo todoCategory={category}/>
-	<slot />
+	<strong class="title">{`${title} Tasks`}</strong>
+	<AddTodo todoCategory={category} />
+	<section class="tasks" aria-label="Tasks">
+		<slot />
+	</section>
 </div>
 
 <style lang="scss">
 	@use './src/lib/theme.scss';
 
+	strong {
+		margin-top: 8px;
+		margin: 12px 12px;
+	}
+
+	.tasks {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		margin-top: 12px;
+		gap: 12px;
+	}
+
 	.cell {
-		border: 1px solid black;
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		border: 1px dashed black;
 		text-align: center;
 		width: 100%;
 		height: 300px;
+		overflow-y: auto;
+		overflow-x: auto;
 
 		.title {
 			font-family: 'IBM Plex Mono', monospace;

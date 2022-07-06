@@ -36,12 +36,20 @@
 		font-size: 32px;
 		line-height: 42px;
 		color: theme.$dark;
+
+		@media (min-width: 768px) {
+			text-align: center;
+		}
 	}
 
 	h3 {
 		font-family: 'IBM Plex Sans', sans-serif;
 		color: theme.$dark;
 		font-size: 24px;
+
+		@media (min-width: 768px) {
+			text-align: center;
+		}
 	}
 
 	section {
@@ -50,5 +58,9 @@
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 21px;
+
+		@media (min-width: 768px) {
+			text-align: center;
+		}
 	}
 </style>
