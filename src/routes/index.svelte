@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
 	import EisenhowerMatrix from '$lib/eisenhowerMatrix.svelte';
+
 </script>
 
 <h1>Eisenshower</h1>
@@ -17,15 +18,8 @@
 <EisenhowerMatrix />
 
 <style lang="scss">
-	@use './src/lib/theme.scss';
-
-	:global(body) {
-		padding: 15px;
-	}
-
 	h1 {
 		font-family: 'IBM Plex Mono', monospace;
-		color: theme.$dark;
 		text-align: center;
 	}
 
@@ -35,7 +29,6 @@
 		font-weight: bold;
 		font-size: 32px;
 		line-height: 42px;
-		color: theme.$dark;
 
 		@media (min-width: 768px) {
 			text-align: center;
@@ -44,7 +37,6 @@
 
 	h3 {
 		font-family: 'IBM Plex Sans', sans-serif;
-		color: theme.$dark;
 		font-size: 24px;
 
 		@media (min-width: 768px) {

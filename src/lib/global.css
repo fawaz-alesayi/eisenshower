@@ -1,0 +1,31 @@
+:root {
+	max-width: initial;
+}
+
+body {
+	max-width: initial;
+}
+
+/* :root {
+	--dark: #03045e;
+	--light: #caf0f8;
+	--main-theme: var(--dark);
+	--background-body: var(--dark);
+	--text-main: var(--light);
+	--focus: var(--light);
+	--text-bright: var(--light);
+	--form-text: var(--light);
+} */
+
+@media screen and (prefers-color-scheme: light) {
+	:root {
+		--dark: #03045e;
+		--light: #caf0f8;
+		--main-theme: var(--light);
+		--background-body: var(--main-theme);
+		--text-main: var(--dark);
+		--focus: var(--dark);
+		--text-bright: var(--dark);
+		--form-text: var(--dark);
+	}
+}

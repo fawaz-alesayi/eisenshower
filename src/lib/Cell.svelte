@@ -31,8 +31,6 @@
 </div>
 
 <style lang="scss">
-	@use './src/lib/theme.scss';
-
 	strong {
 		margin-top: 8px;
 		margin: 12px 12px;

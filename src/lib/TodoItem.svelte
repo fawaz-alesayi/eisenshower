@@ -17,7 +17,7 @@
 	};
 </script>
 
-<section class="todo-container" transition:fly={{ duration: 100 }}>
+<section class="todo-container" transition:fly={{ duration: 300 }}>
 	<div>
 		{todo.completed ? '✅' : '❌'}
 		<h5
@@ -45,8 +45,6 @@
 </section>
 
 <style lang="scss">
-	@use './src/lib/theme.scss';
-
 	section {
 		font-family: 'IBM Plex Sans';
 		font-style: normal;
@@ -61,19 +59,18 @@
 		justify-content: space-between;
 		align-items: baseline;
 		padding: 8px;
-		border-bottom: 1px solid theme.$dark;
+		border-bottom: 1px solid var(--dark);
 		width: 100%;
 	}
 
 	.todo {
 		font-family: 'IVM Plex Mono', monospace;
 		font-size: 18px;
-		color: theme.$dark;
 		display: inline;
 	}
 
 	.btn {
-		color: theme.$light;
+		color: var(--light);
 		width: 100px;
 		text-align: center;
 	}

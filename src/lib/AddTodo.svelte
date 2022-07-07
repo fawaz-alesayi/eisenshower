@@ -2,6 +2,7 @@
 	import '@fontsource/ibm-plex-sans';
 	import { nanoid } from 'nanoid';
 	import { todos, type TodoCategory } from '$lib/stores/todoStore';
+	import { Editor, Viewer } from 'bytemd';
 
 	let todoContent: string;
 	export let todoCategory: TodoCategory;
@@ -28,6 +29,7 @@
 	}}
 >
 	<input
+	    class="input"
 		type="text"
 		aria-label="Add todo"
 		autocomplete="off"
@@ -38,13 +40,15 @@
 		on:blur={() => (focused = false)}
 		placeholder="Start now. Type your first task."
 	/>
+		<!-- <template>
+			<Editor value={todoContent} mode={"tab"} on:change={(e) => (todoContent = e.detail.value)} />
+		</template> -->
 	<hr class="hr" class:focused />
-</form>
+</form>	
 
 <style lang="scss">
-	@use './src/lib/theme.scss';
 	$margin-start-input: 12px;
-	$padding-input: 8px;
+	$padding-input: 16px;
 
 	form {
 		display: flex;
@@ -52,7 +56,7 @@
 		justify-content: start;
 	}
 
-	input {
+	.input {
 		height: 15px;
 		margin-top: 12px;
 		display: block;
@@ -61,11 +65,11 @@
 		margin-right: auto;
 		font-size: 1rem;
 		padding: $padding-input;
-		background-color: theme.$light;
+		background-color: var(--light);
 		border: 0;
-
 		&:focus {
 			outline: none;
+			box-shadow: none;
 		}
 	}
 
@@ -75,7 +79,7 @@
 		border: none;
 		margin-top: 0px;
 		margin-left: $margin-start-input + $padding-input;
-		background-color: theme.$dark;
+		background-color: var(--text-bright);
 		transform: scale(0);
 		transition: transform 0.2s ease-in-out;
 	}

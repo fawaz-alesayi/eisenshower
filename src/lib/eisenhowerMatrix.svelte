@@ -37,9 +37,6 @@
 </section>
 
 <style lang="scss">
-	// import scss file from index.svelte
-	@use './src/lib/theme.scss';
-
 	.matrix-container {
 		margin: auto;
 		display: flex;
@@ -52,10 +49,15 @@
 			text-align: right;
 			font-family: 'IBM Plex Mono', monospace;
 			color: #ff0000;
-			background-color: theme.$light;
+			background-color: var(--light);
 			height: auto;
 			margin-right: 0;
 			margin-left: auto;
+
+			// focus and active
+			&:active, &:focus {
+				--focus: red;
+			}
 		}
 	}
 
