@@ -2,12 +2,13 @@
 	import '@fontsource/ibm-plex-sans';
 	import { nanoid } from 'nanoid';
 	import { todos, type TodoCategory } from '$lib/stores/todoStore';
-	import { Editor, Viewer } from 'bytemd';
+	import Editor from './Editor.svelte';
 
-	let todoContent: string;
+	let todoContent: string = '';
+
 	export let todoCategory: TodoCategory;
 
-	const addTodo = async (category: TodoCategory) => {
+	const addTodo = async (todoContent: string, category: TodoCategory) => {
 		const todo = {
 			id: nanoid(),
 			content: todoContent,
@@ -15,7 +16,6 @@
 			category
 		};
 		todos.update((oldValues) => [...oldValues, todo]);
-		todoContent = '';
 	};
 
 	let focused = false;
@@ -24,12 +24,12 @@
 <form
 	on:submit|preventDefault={() => {
 		if (todoContent.trim()) {
-			addTodo(todoCategory);
+			addTodo(todoContent, todoCategory);
 		}
 	}}
 >
-	<input
-	    class="input"
+	<!-- <input
+		class="input"
 		type="text"
 		aria-label="Add todo"
 		autocomplete="off"
@@ -39,12 +39,19 @@
 		on:focus={() => (focused = true)}
 		on:blur={() => (focused = false)}
 		placeholder="Start now. Type your first task."
+	/> -->
+	<Editor
+		{todoContent}
+		onFocus={() => {
+			focused = true;
+		}}
+		onBlur={() => {
+			focused = false;
+		}}
 	/>
-		<!-- <template>
-			<Editor value={todoContent} mode={"tab"} on:change={(e) => (todoContent = e.detail.value)} />
-		</template> -->
+
 	<hr class="hr" class:focused />
-</form>	
+</form>
 
 <style lang="scss">
 	$margin-start-input: 12px;
@@ -54,23 +61,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
-	}
-
-	.input {
-		height: 15px;
-		margin-top: 12px;
-		display: block;
-		width: 90%;
-		margin-left: $margin-start-input;
-		margin-right: auto;
-		font-size: 1rem;
-		padding: $padding-input;
-		background-color: var(--light);
-		border: 0;
-		&:focus {
-			outline: none;
-			box-shadow: none;
-		}
 	}
 
 	.hr {
@@ -87,15 +77,5 @@
 	.focused {
 		transform: scale(1);
 		transition: transform 0.2s ease-in-out;
-	}
-
-	.add-todo {
-		width: 140px;
-		height: 30px;
-		font-size: 14px;
-		margin-top: 20px;
-		display: block;
-		margin-right: auto;
-		margin-left: auto;
 	}
 </style>
