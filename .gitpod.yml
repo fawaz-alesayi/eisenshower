@@ -18,3 +18,4 @@ tasks:
 vscode:
   extensions:
     - svelte.svelte-vscode
+    - GitHub.copilot

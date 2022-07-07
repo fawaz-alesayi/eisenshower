@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
+		"dev:ngrok": "cross-env HMR_HOST=https://localhost vite dev ",
 		"build": "vite build",
 		"package": "vite package",
 		"preview": "vite preview",
@@ -19,6 +20,7 @@
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
