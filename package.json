@@ -17,6 +17,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.22.2",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-static": "1.0.0-next.35",
 		"@sveltejs/kit": "next",
 		"@types/dompurify": "^2.3.3",
 		"@types/marked": "^4.0.3",

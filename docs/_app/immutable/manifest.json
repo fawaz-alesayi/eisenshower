@@ -1,0 +1,75 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-7562679e.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-cf4939de.js",
+      "_index-239dd99c.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-e0eb927b.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-cf4939de.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-d80c239f.css"
+    ],
+    "assets": [
+      "assets/remixicon-64bb3a0f.eot",
+      "assets/remixicon-e61f0d10.woff2",
+      "assets/remixicon-c2dacfbc.woff",
+      "assets/remixicon-0ac8bc3c.ttf",
+      "assets/remixicon-a10268fe.svg"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-591c9ea5.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-cf4939de.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-995b5649.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-cf4939de.js",
+      "_index-239dd99c.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-5f2657d0.css"
+    ],
+    "assets": [
+      "assets/ibm-plex-sans-cyrillic-ext-400-normal-5cc4dcc1.woff2",
+      "assets/ibm-plex-sans-all-400-normal-d3d9f55b.woff",
+      "assets/ibm-plex-sans-cyrillic-400-normal-6a0b950c.woff2",
+      "assets/ibm-plex-sans-greek-400-normal-575e5b3b.woff2",
+      "assets/ibm-plex-sans-vietnamese-400-normal-09a4c493.woff2",
+      "assets/ibm-plex-sans-latin-ext-400-normal-3f23485d.woff2",
+      "assets/ibm-plex-sans-latin-400-normal-fcecb97c.woff2"
+    ]
+  },
+  "_index-cf4939de.js": {
+    "file": "chunks/index-cf4939de.js"
+  },
+  "_index-239dd99c.js": {
+    "file": "chunks/index-239dd99c.js",
+    "imports": [
+      "_index-cf4939de.js"
+    ]
+  }
+}
