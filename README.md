@@ -1,38 +1,13 @@
-# create-svelte
+# Eisenshower
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Eisenshower is a free eisenhower matrix. I made it because I could not find an online eisenhower matrix that does not require you to sign-up for some bullshit.
 
-## Creating a project
+### Features
+- Private: Saves tasks in Local Storage
+- Powerful: WYSIWYG editor as the input, you can make your tasks **bold** or *italic* by selecintg the text and Ctrl+B or Ctrl+I or by surrounding the text with asterisks
+- Easy: Delete all your tasks at the start of a new day
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Upcoming Features
+- Timeboxed tasks
+- Google Drive Sync
+- Automatic daily reset
