@@ -49,6 +49,7 @@
 		"modern-normalize": "^1.1.0",
 		"nanoid": "^4.0.0",
 		"prosemirror-state": "^1.4.1",
+		"remixicon": "^2.5.0",
 		"svelte-dnd-action": "^0.9.18",
 		"svelte-simple-modal": "^1.4.1",
 		"water.css": "^2.1.1"

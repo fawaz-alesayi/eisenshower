@@ -1,11 +1,14 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
 	import EisenhowerMatrix from '$lib/eisenhowerMatrix.svelte';
-
+	import Logo from '$lib/Logo.svelte';
 </script>
 
-<h1>Eisenshower</h1>
-
+<header>
+	<i class="ri-heavy-showers-line"></i>
+	<h1>Eisenshower</h1>
+	<i class="ri-heavy-showers-line"></i>
+</header>
 <h2>Be more productive by setting your priorities straight.</h2>
 
 <section>
@@ -17,7 +20,28 @@
 
 <EisenhowerMatrix />
 
+<footer>
+	<div class="footer-info">
+		<a href="https://github.com">Github</a>
+		<p>Made with ❤️ by <a href="https://twitter.com/fawaztsa">Fawaz Alesayi</a></p>
+	</div>
+</footer>
+
 <style lang="scss">
+	header {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		margin: auto auto;
+		gap: 24px;
+
+		.ri-heavy-showers-line {
+			font-size: 48px;
+		}
+	}
+
 	h1 {
 		font-family: 'IBM Plex Mono', monospace;
 		text-align: center;
@@ -54,5 +78,22 @@
 		@media (min-width: 768px) {
 			text-align: center;
 		}
+	}
+
+	footer {
+		margin-top: 128px;
+		border-top: 1px dashed black;
+		font-size: 0.85rem;
+		font-family: 'IBM Plex Mono', monospace;
+	}
+
+	.footer-info {
+		margin: auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		text-align: center;
+		align-items: baseline;
+		gap: 16px;
 	}
 </style>
