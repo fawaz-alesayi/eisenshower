@@ -1,7 +1,8 @@
 import adapter from "@sveltejs/adapter-static"; 
 import preprocess from 'svelte-preprocess';
 
-const dev = "production" === "development";
+// change this to false when building the website
+const dev = true
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,7 +16,7 @@ const config = {
 			assets: "docs",
 		}),
 		paths: {
-            // change below to your repo name
+            // needed to tell sveltekit the base of the repo.
             base: dev ? "" : "/eisenshower",
         },
 		prerender: {

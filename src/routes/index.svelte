@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
 	import EisenhowerMatrix from '$lib/eisenhowerMatrix.svelte';
-	import Logo from '$lib/Logo.svelte';
 </script>
 
 <header>
