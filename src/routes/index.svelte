@@ -22,7 +22,7 @@
 
 <footer>
 	<div class="footer-info">
-		<a href="https://github.com">Github</a>
+		<a href="https://github.com/fawaz-alesayi/eisenshower"><i class="ri-github-fill"></i></a>
 		<p>Made with ❤️ by <a href="https://twitter.com/fawaztsa">Fawaz Alesayi</a></p>
 	</div>
 </footer>
@@ -93,7 +93,11 @@
 		flex-direction: row;
 		justify-content: center;
 		text-align: center;
-		align-items: baseline;
+		align-items: center;
 		gap: 16px;
+	}
+
+	.ri-github-fill {
+		font-size: 1.5rem;
 	}
 </style>
