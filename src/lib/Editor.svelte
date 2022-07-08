@@ -7,23 +7,31 @@
 	import TextAlign from '@tiptap/extension-text-align';
 	import PlaceHolder from '@tiptap/extension-placeholder';
 	import { noEnterExtension } from './tiptap_extensions/noEnter';
+	import type { TodoCategory } from './stores/todoStore';
+	import { addTodo } from './stores/todoStore';
 
 	let element: Element;
 	let editor: Editor;
 
 	export let onFocus: any = null;
 	export let onBlur: any = null;
+	export let todoCategory: TodoCategory;
 
-	export let todoContent;
+	const add = async () => {
+		if (editor.getText().trim().length > 0) {
+			await addTodo(editor.getHTML(), todoCategory);
+		}
+	};
 
-	onMount(() => {
+	onMount(async () => {
 		editor = new Editor({
 			element: element,
 			extensions: [
 				StarterKit,
 				noEnterExtension.configure({
 					handleEnter: () => {
-						return false;
+						add();
+						return true;
 					}
 				}),
 				TextAlign.configure({
@@ -33,7 +41,7 @@
 					placeholder: 'Start now. Type your first task.'
 				})
 			],
-			content: `${todoContent}`,
+			content: ``,
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;

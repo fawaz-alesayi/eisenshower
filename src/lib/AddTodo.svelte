@@ -1,33 +1,16 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
-	import { nanoid } from 'nanoid';
-	import { todos, type TodoCategory } from '$lib/stores/todoStore';
+	import { getContext } from 'svelte';
 	import Editor from './Editor.svelte';
-
+	import type { TodoCategory } from './stores/todoStore';
 	let todoContent: string = '';
 
-	export let todoCategory: TodoCategory;
-
-	const addTodo = async (todoContent: string, category: TodoCategory) => {
-		const todo = {
-			id: nanoid(),
-			content: todoContent,
-			completed: false,
-			category
-		};
-		todos.update((oldValues) => [...oldValues, todo]);
-	};
+	export let todoCategory: TodoCategory
 
 	let focused = false;
 </script>
 
-<form
-	on:submit|preventDefault={() => {
-		if (todoContent.trim()) {
-			addTodo(todoContent, todoCategory);
-		}
-	}}
->
+<form on:submit|preventDefault={() => {}}>
 	<!-- <input
 		class="input"
 		type="text"
@@ -41,7 +24,7 @@
 		placeholder="Start now. Type your first task."
 	/> -->
 	<Editor
-		{todoContent}
+		{todoCategory}
 		onFocus={() => {
 			focused = true;
 		}}

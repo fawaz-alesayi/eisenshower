@@ -19,15 +19,20 @@
 
 <section class="todo-container" transition:fly={{ duration: 300 }}>
 	<div>
-		{todo.completed ? '✅' : '❌'}
-		<h5
+		<!-- <h5
 			class="todo"
 			on:click|stopPropagation={() => {
 				toggleTodo(todo.id);
 			}}
 		>
 			{todo.content}
-		</h5>
+		</h5> -->
+		{#if !todo.completed}
+			<span>❌</span>
+		{:else}
+			<span>✔️</span>
+		{/if}
+		<span class="inline">{@html todo.content}</span>
 	</div>
 	<div class="btn-group">
 		<button class="btn" on:click|stopPropagation={() => toggleTodo(todo.id)}>
@@ -45,6 +50,11 @@
 </section>
 
 <style lang="scss">
+
+	.inline {
+		display: inline-block;
+	}
+
 	section {
 		font-family: 'IBM Plex Sans';
 		font-style: normal;

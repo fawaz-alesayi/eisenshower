@@ -1,4 +1,6 @@
 <script lang="ts">
+import { setContext } from 'svelte';
+
 	import Modal, { bind } from 'svelte-simple-modal';
 	import { writable } from 'svelte/store';
 	import AddTodo from './AddTodo.svelte';
@@ -6,8 +8,11 @@
 	import type { TodoCategory } from './stores/todoStore';
 	const modal = writable(null);
 	export let category: TodoCategory;
+
 	const title = categoryNames[category];
 	const showModal = () => modal.set(bind(AddTodo, { todoCategory: category }));
+
+	
 </script>
 
 <!-- <Modal
