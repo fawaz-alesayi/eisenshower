@@ -1,36 +1,62 @@
 <script lang="ts">
 	// @ts-nocheck
 
+	interface EditingConfiguration {
+		task: TodoItem;
+	}
+
+	interface AddingConfiguration {
+		category: TodoCategory;
+	}
+
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import TextAlign from '@tiptap/extension-text-align';
 	import PlaceHolder from '@tiptap/extension-placeholder';
 	import { noEnterExtension } from './tiptap_extensions/noEnter';
-	import type { TodoCategory } from './stores/todoStore';
-	import { addTodo } from './stores/todoStore';
+	import type { TodoCategory, TodoItem } from './stores/todoStore';
+	import { addTodo, updateTodo } from './stores/todoStore';
 
 	let element: Element;
 	let editor: Editor;
 
 	export let onFocus: any = null;
 	export let onBlur: any = null;
-	export let todoCategory: TodoCategory;
 
-	const add = async () => {
+	export let config: EditingConfiguration | AddingConfiguration;
+
+	const add = (category: TodoCategory) => {
 		if (editor.getText().trim().length > 0) {
-			await addTodo(editor.getHTML(), todoCategory);
+			addTodo(editor.getHTML(), category);
 		}
 	};
 
-	onMount(async () => {
+	const update = (task: TodoItem) => {
+		if (editor.getText().trim().length > 0) {
+			updateTodo({
+				...task,
+				content: editor.getHTML()
+			});
+		}
+	};
+
+	const handleEditorEnter = () => {
+		if (config.task) {
+			update(task);
+		} else {
+			add(config.category);
+		}
+	};
+
+	onMount(() => {
 		editor = new Editor({
 			element: element,
 			extensions: [
 				StarterKit,
 				noEnterExtension.configure({
 					handleEnter: () => {
-						add();
+						handleEditorEnter();
 						return true;
 					}
 				}),
@@ -41,7 +67,7 @@
 					placeholder: 'Start now. Type your first task.'
 				})
 			],
-			content: ``,
+			content: config.task ? config.task.content : '',
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;
@@ -53,10 +79,16 @@
 			},
 			onBlur: () => {
 				if (onBlur) {
+					if (config.task) {
+						update(config.task);
+					}
 					onBlur();
 				}
 			}
 		});
+		// if (config.task) {
+		// 	editor.chain().focus().run();
+		// }
 	});
 
 	onDestroy(() => {

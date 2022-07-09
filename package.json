@@ -5,6 +5,7 @@
 		"dev": "vite dev",
 		"dev:ngrok": "cross-env HMR_HOST=https://localhost vite dev ",
 		"build": "vite build",
+		"build-gh": "cross-env GH_PAGES=1 vite build",
 		"package": "vite package",
 		"preview": "vite preview",
 		"prepare": "vite sync",

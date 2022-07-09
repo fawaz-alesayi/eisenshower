@@ -28,5 +28,6 @@ body {
 		--focus: var(--dark);
 		--text-bright: var(--dark);
 		--form-text: var(--dark);
+		--button-base: var(--dark);
 	}
 }

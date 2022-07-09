@@ -22,7 +22,7 @@ export const importantNotUrgentTodos = derived(todos, $todos => $todos.filter(to
 export const notImportantUrgentTodos = derived(todos, $todos => $todos.filter(todo => todo.category === "NotImportantUrgent"));
 export const notImportantNotUrgentTodos = derived(todos, $todos => $todos.filter(todo => todo.category === "NotImportantNotUrgent"));
 
-export const addTodo = async (todoContent: string, category: TodoCategory) => {
+export const addTodo = (todoContent: string, category: TodoCategory) => {
 	const todo = {
 		id: nanoid(),
 		content: todoContent,
@@ -31,3 +31,9 @@ export const addTodo = async (todoContent: string, category: TodoCategory) => {
 	};
 	todos.update((oldValues) => [...oldValues, todo]);
 };
+
+export const updateTodo = (newTodo: TodoItem) => {
+	todos.update((oldValues) => {
+		return oldValues.map(todo => todo.id === newTodo.id ? newTodo : todo);
+	});
+}

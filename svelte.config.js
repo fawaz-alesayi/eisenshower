@@ -1,8 +1,13 @@
-import adapter from "@sveltejs/adapter-static"; 
+import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-// change this to false when building the website
-const dev = true
+const getBasePath = () => {
+	if (process.env.GH_PAGES) {
+		return '/eisenshower';
+	} else {
+		return '';
+	}
+};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -12,13 +17,13 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			pages: "docs",
-			assets: "docs",
+			pages: 'docs',
+			assets: 'docs'
 		}),
 		paths: {
-            // needed to tell sveltekit the base of the repo.
-            base: dev ? "" : "/eisenshower",
-        },
+			// needed to tell sveltekit the base of the repo.
+			base: getBasePath()
+		},
 		prerender: {
 			default: true
 		}

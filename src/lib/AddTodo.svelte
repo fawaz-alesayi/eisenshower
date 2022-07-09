@@ -1,30 +1,23 @@
 <script lang="ts">
 	import '@fontsource/ibm-plex-sans';
-	import { getContext } from 'svelte';
 	import Editor from './Editor.svelte';
 	import type { TodoCategory } from './stores/todoStore';
-	let todoContent: string = '';
 
-	export let todoCategory: TodoCategory
+	export let todoCategory: TodoCategory;
 
 	let focused = false;
+	let hovered = false;
 </script>
 
-<form on:submit|preventDefault={() => {}}>
-	<!-- <input
-		class="input"
-		type="text"
-		aria-label="Add todo"
-		autocomplete="off"
-		data-lpignore="true"
-		data-form-type="other"
-		bind:value={todoContent}
-		on:focus={() => (focused = true)}
-		on:blur={() => (focused = false)}
-		placeholder="Start now. Type your first task."
-	/> -->
+<form
+	on:submit|preventDefault={() => {}}
+	on:mouseenter={() => (hovered = true)}
+	on:mouseleave={() => (hovered = false)}
+>
 	<Editor
-		{todoCategory}
+		config={{
+			category: todoCategory
+		}}
 		onFocus={() => {
 			focused = true;
 		}}
@@ -33,7 +26,7 @@
 		}}
 	/>
 
-	<hr class="hr" class:focused />
+	<hr class="hr" class:hovered class:focused />
 </form>
 
 <style lang="scss">
@@ -55,6 +48,11 @@
 		background-color: var(--text-bright);
 		transform: scale(0);
 		transition: transform 0.2s ease-in-out;
+	}
+
+	.hovered {
+		transform: scale(0.5);
+		transition: transform 0.1s ease-in-out;
 	}
 
 	.focused {
