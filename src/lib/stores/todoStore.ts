@@ -1,12 +1,12 @@
 // src/stores/content.js
-import { browser } from '$app/env';
-import { persist, localStorage as localStorageStore } from '@macfja/svelte-persistent-store';
+import { browser } from '$app/environment';
+import { persist, createLocalStorage } from '@macfja/svelte-persistent-store';
 import { nanoid } from 'nanoid';
 import { derived, writable } from 'svelte/store';
 
 const KEY_NAME = 'eisenshower_todos';
 
-export const todos = persist(writable<TodoItem[]>([]), localStorageStore(), KEY_NAME);
+export const todos = persist(writable<TodoItem[]>([]), createLocalStorage(), KEY_NAME);
 
 export type TodoItem = {
 	id: string;

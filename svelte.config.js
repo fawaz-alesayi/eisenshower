@@ -1,13 +1,6 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import preprocess from 'svelte-preprocess';
 
-const getBasePath = () => {
-	if (process.env.GH_PAGES) {
-		return '/eisenshower';
-	} else {
-		return '';
-	}
-};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,17 +9,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter({
-			pages: 'docs',
-			assets: 'docs'
-		}),
-		paths: {
-			// needed to tell sveltekit the base of the repo.
-			base: getBasePath()
-		},
-		prerender: {
-			default: true
-		}
+		adapter: adapter(),
 	}
 };
 
